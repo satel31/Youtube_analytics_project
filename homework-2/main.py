@@ -17,4 +17,4 @@ if __name__ == '__main__':
     # <googleapiclient.discovery.Resource object at 0x000002B1E54F9750>
 
     # создаем файл 'vdud.json' в данными по каналу
-    vdud.to_json('vdud.json')
+    #vdud.to_json('vdud.json')
