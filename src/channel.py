@@ -7,7 +7,6 @@ class Channel:
     """Класс для ютуб-канала"""
     api_key: str = os.getenv('API_KEY')
     youtube = build('youtube', 'v3', developerKey=api_key)
-    JSON_DATA = '../src/channel.json'
 
     def __init__(self, channel_id: str) -> None:
         """Экземпляр инициализируется id канала. Дальше все данные будут подтягиваться по API."""
@@ -41,7 +40,7 @@ class Channel:
         """ :return: объект для работы с YouTube API"""
         return cls.youtube
 
-    def to_json(self):
+    def to_json(self, filename):
         """Сохранят в файл значения атрибутов экземпляра Channel"""
         python_data = {}
 
@@ -54,6 +53,9 @@ class Channel:
         python_data['channel_views'] = self.channel_views
 
         json_data = json.dumps(python_data, indent=2, ensure_ascii=False)
+
+        filepath = os.path.join(os.getcwd(), filename)
+
 
         with open(self.JSON_FILE, 'w') as file:
             pass
