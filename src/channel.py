@@ -16,7 +16,7 @@ class Channel:
 
         self.title = data['items'][0]['snippet']['title']
         self.channel_description = data['items'][0]['snippet']['description']
-        self.url = data['items'][0]['snippet']['thumbnails']['default']['url']
+        self.url = f'https://www.youtube.com/channel/{self.__channel_id}'
         self.channel_subscription = data['items'][0]['statistics']['subscriberCount']
         self.video_count = data['items'][0]['statistics']['videoCount']
         self.channel_views = data['items'][0]['statistics']['viewCount']
@@ -56,14 +56,5 @@ class Channel:
 
         filepath = os.path.join(os.getcwd(), filename)
 
-
-        with open(self.JSON_FILE, 'w') as file:
-            pass
-            
-
-
-
-
-
-
-vdud = Channel('UCMCgOm8GZkHp8zJ6l7_hIuA')
+        with open(filepath, 'w') as file:
+            file.write(json_data)
