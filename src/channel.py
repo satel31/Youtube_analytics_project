@@ -58,3 +58,18 @@ class Channel:
 
         with open(filepath, 'w') as file:
             file.write(json_data)
+
+    def __str__(self) -> str:
+        return f'{self.title} ({self.url})'
+
+    def __add__(self, other):
+        return int(self.channel_subscription) + int(other.channel_subscription)
+
+    def __sub__(self, other):
+        return int(self.channel_subscription) - int(other.channel_subscription)
+
+    def __rsub__(self, other):
+        return int(other.channel_subscription) - int(self.channel_subscription)
+
+    def __ge__(self, other):
+        return int(self.channel_subscription) >= int(other.channel_subscription)
