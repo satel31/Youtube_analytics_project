@@ -1,6 +1,8 @@
 import json
-from googleapiclient.discovery import build
 import os
+
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
 
 class Video:
     """Class with Video information"""
@@ -10,12 +12,17 @@ class Video:
 
     def __init__(self, video_id: str) -> None:
         self.video_id: str = video_id
-
         data = self.video_data()
-        self.video_name: str = data['items'][0]['snippet']['title']
-        self.video_url: str = f'https://www.youtube.com/watch?v={self.video_id}'
-        self.video_views: int = data['items'][0]['statistics']['viewCount']
-        self.video_likes: int = data['items'][0]['statistics']['likeCount']
+        try:
+            self.title: str = data['items'][0]['snippet']['title']
+            self.video_url: str = f'https://www.youtube.com/watch?v={self.video_id}'
+            self.video_views: int = data['items'][0]['statistics']['viewCount']
+            self.like_count: int = data['items'][0]['statistics']['likeCount']
+        except Exception:
+            self.title = None
+            self.video_url = None
+            self.video_views = None
+            self.like_count = None
 
     def video_data(self) -> dict:
         """Return information about the video by its ID"""
