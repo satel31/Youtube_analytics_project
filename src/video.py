@@ -18,7 +18,7 @@ class Video:
             self.video_url: str = f'https://www.youtube.com/watch?v={self.video_id}'
             self.video_views: int = data['items'][0]['statistics']['viewCount']
             self.like_count: int = data['items'][0]['statistics']['likeCount']
-        except Exception:
+        except IndexError:
             self.title = None
             self.video_url = None
             self.video_views = None
