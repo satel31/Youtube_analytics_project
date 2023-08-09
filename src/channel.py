@@ -4,12 +4,11 @@ import os
 
 
 class Channel:
-    """Класс для ютуб-канала"""
+    """YouTube channel class"""
     api_key: str = os.getenv('API_KEY')
     youtube = build('youtube', 'v3', developerKey=api_key)
 
     def __init__(self, channel_id: str) -> None:
-        """Экземпляр инициализируется id канала. Дальше все данные будут подтягиваться по API."""
         self.__channel_id = channel_id
 
         data = self.json_to_python()
@@ -26,7 +25,6 @@ class Channel:
         return self.__channel_id
 
     def print_info(self):
-        """Выводит в консоль информацию о канале."""
         channel = self.youtube.channels().list(id=self.channel_id, part='snippet, statistics').execute()
         return json.dumps(channel, indent=2, ensure_ascii=False)
 
@@ -37,11 +35,10 @@ class Channel:
 
     @classmethod
     def get_service(cls):
-        """ :return: объект для работы с YouTube API"""
+        """ :return: object for work with YouTube API"""
         return cls.youtube
 
     def to_json(self, filename):
-        """Сохранят в файл значения атрибутов экземпляра Channel"""
         python_data = {}
 
         python_data['channel_id'] = self.__channel_id
